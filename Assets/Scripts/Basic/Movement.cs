@@ -2,12 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Animator))]
+[RequireComponent(typeof(Rigidbody2D))]
 public class Movement : MonoBehaviour
 {
-    [SerializeField] private float _speed;
-    [SerializeField] private float _jumpForce;
-    [SerializeField] private float _groundOffsetY;
-    [SerializeField] private float _groundRadius;
+    [SerializeField] private readonly float _speed;
+    [SerializeField] private readonly float _jumpForce;
+    [SerializeField] private readonly float _groundOffsetY;
+    [SerializeField] private readonly float _groundRadius;
 
     private Animator _animator;
     private Rigidbody2D _rigidbody2D;
@@ -15,7 +17,10 @@ public class Movement : MonoBehaviour
     private bool _facingRight = true;
     private bool _isGrounded = false;
 
-    private void Start()
+    private const string _jump = "Jump";
+    private const string _walk = "Walk";
+
+    private void OnEnable()
     {
         _animator = GetComponent<Animator>();
         _rigidbody2D = GetComponent<Rigidbody2D>();
@@ -32,7 +37,7 @@ public class Movement : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space) && _isGrounded)
         {
-            _animator.SetTrigger("Jump)");
+            _animator.SetTrigger(_jump);
             _rigidbody2D.AddForce(transform.up * _jumpForce, ForceMode2D.Impulse);
         }
     }
@@ -41,7 +46,7 @@ public class Movement : MonoBehaviour
     {
         float speed = 1f;
         Vector2 targetVelocity = new Vector2(_horizontalMove * speed, _rigidbody2D.velocity.y);
-        _animator.SetBool("Walk", Mathf.Abs(_horizontalMove) >= 0.1f);
+        _animator.SetBool(_walk, Mathf.Abs(_horizontalMove) >= 0.1f);
         _rigidbody2D.velocity = targetVelocity;
         CheckGround();
     }
