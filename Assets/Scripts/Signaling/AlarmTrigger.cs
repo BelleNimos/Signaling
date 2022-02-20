@@ -12,7 +12,6 @@ public class AlarmTrigger : MonoBehaviour
 
     private const float MinVolume = 0.01f;
     private const float MaxVolume = 1f;
-    
 
     private void OnEnable()
     {
