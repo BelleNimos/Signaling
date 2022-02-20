@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Animator))]
@@ -17,8 +15,8 @@ public class Movement : MonoBehaviour
     private bool _facingRight = true;
     private bool _isGrounded = false;
 
-    private const string _jump = "Jump";
-    private const string _walk = "Walk";
+    private const string Jump = "Jump";
+    private const string Walk = "Walk";
 
     private void OnEnable()
     {
@@ -37,7 +35,7 @@ public class Movement : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space) && _isGrounded)
         {
-            _animator.SetTrigger(_jump);
+            _animator.SetTrigger(Jump);
             _rigidbody2D.AddForce(transform.up * _jumpForce, ForceMode2D.Impulse);
         }
     }
@@ -46,7 +44,7 @@ public class Movement : MonoBehaviour
     {
         float speed = 1f;
         Vector2 targetVelocity = new Vector2(_horizontalMove * speed, _rigidbody2D.velocity.y);
-        _animator.SetBool(_walk, Mathf.Abs(_horizontalMove) >= 0.1f);
+        _animator.SetBool(Walk, Mathf.Abs(_horizontalMove) >= 0.1f);
         _rigidbody2D.velocity = targetVelocity;
         CheckGround();
     }

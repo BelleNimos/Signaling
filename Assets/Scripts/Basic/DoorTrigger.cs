@@ -5,7 +5,7 @@ public class DoorTrigger : MonoBehaviour
 {
     private Animator _animator;
 
-    private const string _open = "Open";
+    private const string Open = "Open";
 
     private void OnEnable()
     {
@@ -15,13 +15,11 @@ public class DoorTrigger : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.TryGetComponent<PhysicsMovement>(out PhysicsMovement physicsMovement))
-        {
-            _animator.SetBool(_open, true);
-        }
+            _animator.SetBool(Open, true);
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        _animator.SetBool(_open, false);
+        _animator.SetBool(Open, false);
     }
 }

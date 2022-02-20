@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 [RequireComponent(typeof(AudioSource))]
@@ -6,10 +7,8 @@ public class AlarmTrigger : MonoBehaviour
     private AudioSource _audioSource;
     private float _currentVolume;
 
-    private bool _isTrigger;
-
-    private const float _minVolume = 0.01f;
-    private const float _maxVolume = 1f;
+    private const float MinVolume = 0.01f;
+    private const float MaxVolume = 1f;
 
     private void OnEnable()
     {
@@ -21,27 +20,25 @@ public class AlarmTrigger : MonoBehaviour
         _currentVolume = _audioSource.volume;
     }
 
-    private void Update()
+    private IEnumerator Increase()
     {
-        if (_isTrigger)
+        for (float i = MaxVolume; i > _currentVolume;)
         {
-            if (_currentVolume <= _maxVolume)
-            {
-                _currentVolume += _minVolume + _minVolume * _minVolume;
-                _audioSource.volume = _currentVolume;
-            }
+            _currentVolume += MinVolume;
+            _audioSource.volume = _currentVolume;
+
+            yield return new WaitForSeconds(MinVolume);
         }
-        else
+    }
+
+    private IEnumerator Reduce()
+    {
+        for (float i = MinVolume; i < _currentVolume;)
         {
-            if (_currentVolume > _minVolume)
-            {
-                _currentVolume -= _minVolume + _minVolume * _minVolume;
-                _audioSource.volume = _currentVolume;
-            }
-            else
-            {
-                _audioSource.Stop();
-            }
+            _currentVolume -= MinVolume;
+            _audioSource.volume = _currentVolume;
+
+            yield return new WaitForSeconds(MinVolume);
         }
     }
 
@@ -49,13 +46,16 @@ public class AlarmTrigger : MonoBehaviour
     {
         if (collision.TryGetComponent<PhysicsMovement>(out PhysicsMovement physicsMovement))
         {
-            _isTrigger = true;
             _audioSource.Play();
+            StartCoroutine(Increase());
         }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        _isTrigger = false;
+        StartCoroutine(Reduce());
+
+        if (_audioSource.volume <= MinVolume)
+            _audioSource.Stop();
     }
 }
