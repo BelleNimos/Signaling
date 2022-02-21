@@ -46,7 +46,7 @@ public class AlarmTrigger : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.TryGetComponent<PhysicsMovement>(out PhysicsMovement physicsMovement))
+        if (collision.TryGetComponent<Player>(out Player player))
             _audioSource.Play();
 
         if (_coroutine != null)
