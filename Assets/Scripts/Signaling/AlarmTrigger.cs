@@ -6,8 +6,7 @@ using UnityEngine.Events;
 public class AlarmTrigger : MonoBehaviour
 {
     private AudioSource _audioSource;
-    private Coroutine _volumeUp;
-    private Coroutine _volumeDown;
+    private Coroutine _coroutine;
     private float _currentVolume;
 
     private const float MinVolume = 0.01f;
@@ -25,27 +24,23 @@ public class AlarmTrigger : MonoBehaviour
 
     private IEnumerator Increase()
     {
-        WaitForSeconds waitForSeconds = new WaitForSeconds(MinVolume);
-
         for (float i = MaxVolume; i > _currentVolume;)
         {
             _currentVolume += MinVolume;
             _audioSource.volume = _currentVolume;
 
-            yield return waitForSeconds;
+            yield return null;
         }
     }
 
     private IEnumerator Reduce()
     {
-        WaitForSeconds waitForSeconds = new WaitForSeconds(MinVolume);
-
         for (float i = MinVolume; i < _currentVolume;)
         {
             _currentVolume -= MinVolume;
             _audioSource.volume = _currentVolume;
 
-            yield return waitForSeconds;
+            yield return null;
         }
     }
 
@@ -54,12 +49,18 @@ public class AlarmTrigger : MonoBehaviour
         if (collision.TryGetComponent<PhysicsMovement>(out PhysicsMovement physicsMovement))
             _audioSource.Play();
 
-        _volumeUp = StartCoroutine(Increase());
+        if (_coroutine != null)
+            StopCoroutine(_coroutine);
+
+        _coroutine = StartCoroutine(Increase());
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        _volumeDown = StartCoroutine(Reduce());
+        if (_coroutine != null)
+            StopCoroutine(_coroutine);
+
+        _coroutine = StartCoroutine(Reduce());
 
         if (_audioSource.volume <= MinVolume)
             _audioSource.Stop();
