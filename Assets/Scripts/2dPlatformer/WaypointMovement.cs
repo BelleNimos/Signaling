@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class WaypointMovement: MonoBehaviour
@@ -15,9 +13,7 @@ public class WaypointMovement: MonoBehaviour
         _points = new Transform[_path.childCount];
 
         for (int i = 0; i < _path.childCount; i++)
-        {
             _points[i] = _path.GetChild(i);
-        }
     }
 
     private void Update()
@@ -31,9 +27,7 @@ public class WaypointMovement: MonoBehaviour
             _currentPoint++;
 
             if (_currentPoint >= _points.Length)
-            {
                 _currentPoint = 0;
-            }
         }
     }
 }
