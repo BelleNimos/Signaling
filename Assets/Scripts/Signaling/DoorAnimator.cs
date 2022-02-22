@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [RequireComponent(typeof(Animator))]
-public class Door : MonoBehaviour
+public class DoorAnimator : MonoBehaviour
 {
     private Animator _animator;
 
