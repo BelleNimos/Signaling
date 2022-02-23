@@ -12,13 +12,12 @@ public class DoorAnimator : MonoBehaviour
         _animator = GetComponent<Animator>();
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    public void EnableAnimation()
     {
-        if (collision.TryGetComponent<Player>(out Player player))
-            _animator.SetBool(Open, true);
+        _animator.SetBool(Open, true);
     }
 
-    private void OnTriggerExit2D(Collider2D collision)
+    public void DisableAnimation()
     {
         _animator.SetBool(Open, false);
     }

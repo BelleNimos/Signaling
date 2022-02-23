@@ -13,9 +13,9 @@ public class CoinPicker : MonoBehaviour
     {
         if (collision.gameObject.tag == CoinTag)
         {
+            Destroy(collision.gameObject);
             _coinsCount++;
             _coinsText.text = _coinsCount.ToString();
-            Destroy(collision.gameObject);
         }
     }
 }
