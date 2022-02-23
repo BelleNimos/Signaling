@@ -1,9 +1,9 @@
 using System.Collections;
 using UnityEngine;
 
-public class CreatingEnemies : MonoBehaviour
+public class CoinsSpawner : MonoBehaviour
 {
-    [SerializeField] private GameObject _enemy;
+    [SerializeField] private GameObject _coin;
     [SerializeField] private Transform[] _points;
     [SerializeField] private float _coolDown;
 
@@ -18,7 +18,7 @@ public class CreatingEnemies : MonoBehaviour
 
         for (int i = 0; i < _points.Length; i++)
         {
-            Instantiate(_enemy, _points[i].position, Quaternion.identity);
+            Instantiate(_coin, _points[i].position, Quaternion.identity);
 
             yield return waitForSeconds;
         }

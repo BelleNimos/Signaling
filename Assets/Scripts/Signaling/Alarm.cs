@@ -23,7 +23,7 @@ public class Alarm : MonoBehaviour
 
     private IEnumerator Increase()
     {
-        for (float i = MaxVolume; i > _currentVolume;)
+        for (float i = MaxVolume; i >= _currentVolume;)
         {
             _currentVolume += MinVolume;
             _audioSource.volume = _currentVolume;
@@ -34,7 +34,7 @@ public class Alarm : MonoBehaviour
 
     private IEnumerator Reduce()
     {
-        for (float i = MinVolume; i < _currentVolume;)
+        for (float i = MinVolume; i <= _currentVolume;)
         {
             _currentVolume -= MinVolume;
             _audioSource.volume = _currentVolume;
