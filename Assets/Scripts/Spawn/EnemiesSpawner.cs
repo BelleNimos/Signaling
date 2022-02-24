@@ -3,16 +3,16 @@ using UnityEngine;
 
 public class EnemiesSpawner : MonoBehaviour
 {
-    [SerializeField] private GameObject _enemy;
+    [SerializeField] private Enemy _enemy;
     [SerializeField] private Transform[] _points;
     [SerializeField] private float _coolDown;
 
     private void Start()
     {
-        StartCoroutine(Create());
+        StartCoroutine(Spawn());
     }
 
-    private IEnumerator Create()
+    private IEnumerator Spawn()
     {
         WaitForSeconds waitForSeconds = new WaitForSeconds(_coolDown);
 

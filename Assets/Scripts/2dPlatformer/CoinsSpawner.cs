@@ -3,16 +3,16 @@ using UnityEngine;
 
 public class CoinsSpawner : MonoBehaviour
 {
-    [SerializeField] private GameObject _coin;
+    [SerializeField] private Coin _coin;
     [SerializeField] private Transform[] _points;
     [SerializeField] private float _coolDown;
 
     private void Start()
     {
-        StartCoroutine(Create());
+        StartCoroutine(Spawn());
     }
 
-    private IEnumerator Create()
+    private IEnumerator Spawn()
     {
         WaitForSeconds waitForSeconds = new WaitForSeconds(_coolDown);
 

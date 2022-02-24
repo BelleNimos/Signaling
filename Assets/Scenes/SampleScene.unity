@@ -1222,6 +1222,7 @@ GameObject:
   m_Component:
   - component: {fileID: 297067020}
   - component: {fileID: 297067021}
+  - component: {fileID: 297067022}
   m_Layer: 0
   m_Name: SpownPoints
   m_TagString: Untagged
@@ -1261,7 +1262,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60ef94417df612c4abbc1adf4aea8e35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _coin: {fileID: 72368210543441323, guid: 08bb533c6ba7bbf4ea8f63de54c20dba, type: 3}
+  _coin: {fileID: -4764297213284138864, guid: 08bb533c6ba7bbf4ea8f63de54c20dba, type: 3}
   _points:
   - {fileID: 449912201}
   - {fileID: 1104506062}
@@ -1270,6 +1271,27 @@ MonoBehaviour:
   - {fileID: 880290362}
   - {fileID: 1510296138}
   _coolDown: 0
+--- !u!114 &297067022
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 297067019}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7defaa8a32dd6d54585318184bfb8a89, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _enemy: {fileID: -1300860211545727813, guid: fd6847e69712eac47b7333c778c9a45e, type: 3}
+  _points:
+  - {fileID: 449912201}
+  - {fileID: 1104506062}
+  - {fileID: 195180896}
+  - {fileID: 1078653460}
+  - {fileID: 880290362}
+  - {fileID: 1510296138}
+  _coolDown: 2
 --- !u!1001 &437751653
 PrefabInstance:
   m_ObjectHideFlags: 0
